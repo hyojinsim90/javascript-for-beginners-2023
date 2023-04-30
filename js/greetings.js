@@ -1,6 +1,8 @@
 const loginForm = document.querySelector("#login-form");
 const loginInput = document.querySelector("#login-form input");
 const greeting = document.querySelector("#greeting");
+const todoForm = document.querySelector("#todo-form"); // todo
+
 
 const HIDDEN_CLASSNAME = "hidden";
 const USERNAME_KEY = "username";
@@ -16,7 +18,12 @@ function onLoginSubmit(event) {
 
 function paintGreetings(username) {
     greeting.innerText = `Hello ${username}`; // 로컬스토리지에 저장한 이름 보여주기
-    greeting.classList.remove(HIDDEN_CLASSNAME); // 숨김표시 삭제
+     // 숨김표시 삭제
+    greeting.classList.remove(HIDDEN_CLASSNAME);
+    clock.classList.remove(HIDDEN_CLASSNAME);
+    todoForm.classList.remove(HIDDEN_CLASSNAME);
+    weather.classList.remove(HIDDEN_CLASSNAME);
+    quote.classList.remove(HIDDEN_CLASSNAME);
 }
 
 /// 초기 진입 세팅
@@ -28,6 +35,11 @@ const savedUsername = localStorage.getItem(USERNAME_KEY);
 if(savedUsername === null) { 
     loginForm.classList.remove(HIDDEN_CLASSNAME);
     loginForm.addEventListener("submit", onLoginSubmit);
+    // 시계, 날씨, todo, 격언 숨김처리
+    clock.classList.add(HIDDEN_CLASSNAME);
+    todoForm.classList.add(HIDDEN_CLASSNAME);
+    weather.classList.add(HIDDEN_CLASSNAME);
+    quote.classList.add(HIDDEN_CLASSNAME);
 } else {
     // 이름이 있으면 -> 환영 화면 보여주기
     paintGreetings(savedUsername);
